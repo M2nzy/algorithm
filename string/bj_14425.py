@@ -5,15 +5,16 @@ S = set()
 testStr = []
 
 for i in range(n):
-    S.append(sys.stdin.readline().strip())
+    S.add(sys.stdin.readline().strip())
 
 for i in range(m):
     testStr.append(sys.stdin.readline().strip())
 
 cnt = 0
-for i in range(n):
+for i in S:
     for j in range(m):
-        if S[i] == testStr[j]:
+        if i == testStr[j]:
             cnt += 1
+
 
 print(cnt)

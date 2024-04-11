@@ -1,3 +1,4 @@
+#이코테 4-1 상하좌우 p110
 import sys
 n = int(sys.stdin.readline().strip())
 move = list(map(str,sys.stdin.readline().split()))

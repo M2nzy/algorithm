@@ -15,5 +15,3 @@ for i in range(N):
         else:
             if abs(arr[0]) in arr:
                 heapq.heappop(arr)
-        
-print(printarr)

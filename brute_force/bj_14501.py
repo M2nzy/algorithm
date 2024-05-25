@@ -12,15 +12,9 @@ for i in range(len(TP)):
     P.append(TP[i][1])
 
 reward = 0
-day = 0
-dayarr = []
-for i in range(N):
-    for j in range(N):
+dayResult = 0
 
-        day += T[i] 
-
-
-    if day > N:
-        break 
-    
-    
+i = 0
+while(True):
+    dayResult += T[i]
+    i = T[i]

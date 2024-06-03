@@ -1,34 +1,35 @@
 import sys
+from collections import deque
+
 
 def bfs():
-    global count, q, visited
+    global q, visited
     while(q):
         cur = q.pop(0)
-        print(cur, end=' ')
-        for next in range(1,N+1):
-            if not visited[next] and miro[cur][next]:
-                count += 1
-                visited[next] = True
+        visited[cur] = True
+        for next in range(1, N+1):
+            if not visited[next] and graph[cur][next]:
                 q.append(next)
+                bfs()
 
-N, M = map(int, sys.stdin.readline().split())
 
-miro = [[False] * (M) for _ in range(N+1)]
 
-print(miro)
+input = sys.stdin.readline
+N, M = map(int, input().split())
 
-for i in range(1,N+1):
-    a = sys.stdin.readline()
-    for j in range(len(a)):
-        if a[j] == '1':
-            miro[i][j] = True
-    print(miro)
+dx = [-1, 1, 0, 0]
+dy = [0, 0, -1, 1]
 
-q = [1]
-count = 0
+inputMiro = []
+miro = []
+q = []
+graph = [[False] * (N+1) for _ in range(N+1)]
 visited = [False] * (N+1)
-visited[1] = True
 
-print(visited)
-bfs()
-print(count)
+for _ in range(N):
+    inputMiro.append(input().strip())
+
+print(inputMiro)
+for i in range(N):
+    miro.append(list(inputMiro[i]))
+print(miro)

@@ -1,15 +1,15 @@
 import sys
 from collections import deque
 def bfs():
-    global q, visited, graph
-    
+    global q, visited, graph, cnt
     while q:
         cur = q.popleft()
-        visited[cur] = True
-        for next in range(N+1):
-            if not visited[next] and graph[cur][next]:
+        for next in range(1, N+1):
+            if not visited[next] and graph[cur][next] == True:
+                visited[next] = True
                 q.append(next)
-                
+                cnt -= 1
+
 
 
 
@@ -26,10 +26,13 @@ for _ in range(M):
     graph[u][v] = graph[v][u] = True
 
 count = 0
- 
 q = deque()
-for i in range(N):
-    for j in range(N):
-        q.append(i,j)
-        bfs()
-        count += 1
+cnt = 0
+result = 0
+cnt += N
+for i in range(1,N+1):
+    
+    q.append(i)
+    visited[i] = True
+    bfs()
+print(cnt)

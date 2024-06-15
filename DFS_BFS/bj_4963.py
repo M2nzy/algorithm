@@ -1,44 +1,51 @@
 import sys
 from collections import deque
 
-dx = [-1, 1, 0, 0]
-dy = [0, 0, -1, 1]
-
+dy = [-1, 1, 0, 0, 1, -1, 1, -1]
+dx = [0, 0, -1, 1, -1, 1, 1, -1]
 def bfs():
-    global q, visited,dx,dy, graph, x, y
+    count = 1
+    global q, visited,dx,dy, graph
     while(q):
-        cur = q.popleft()
-
-        
-        for i in range(4):
+        x, y = q.popleft()
+        visited[x][y] = True
+        for i in range(8):
             nx, ny = x + dx[i], y + dy[i]
+            if 0 <= nx < h and 0 <= ny < w:
+                if not visited[nx][ny] and graph[nx][ny] == 1:
+                    q.append((nx, ny))
+                    graph[nx][ny] = 0
+                    count += 1
+    return count
 
+while(True):
+    input = sys.stdin.readline
+    w, h = map(int, input().split())
+    if (w == 0 and h == 0):
+        break
+    inputGraph = []
+    for _ in range(h):
+        inputGraph.append(input().split())
 
-
-
-input = sys.stdin.readline
-w, h = map(int, input().split())
-
-x, y = 0, 0
-inputGraph = []
-for _ in range(h):
-    inputGraph.append(input().split())
-
-    
-#len(inputGraph[0]) == 가로 길이
-# len(inputGraph) == 세로 길이
-graph = [[0] * (len(inputGraph[0])) for _ in range(len(inputGraph))]
-visited = [[False] * len(inputGraph[0]) for _ in range(len(inputGraph))]
-
-
-print(visited)
-for i in range(len(inputGraph)):
-    for j in range(len(inputGraph[0])):
-        if inputGraph[i][j] == '1':
-            
-            graph[i][j] = 1
         
-print(graph)
+    graph = [[0] * (w) for _ in range(h)]
+    visited = [[False] * (w) for _ in range(h)]
 
 
-q = deque()
+    for i in range(h):
+        for j in range(w):
+            if inputGraph[i][j] == '1':
+                graph[i][j] = 1
+
+
+    q = deque()
+    result = 0
+    for i in range(h):
+        for j in range(w):
+            if(graph[i][j] == 1):
+                q.append((i,j))
+                tmp = bfs()
+                if tmp > 0:
+                    result += 1
+
+    print(result)

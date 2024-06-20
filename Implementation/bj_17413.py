@@ -3,7 +3,6 @@ input= sys.stdin.readline
 
 S = input().strip()
 
-print(S)
 tagCheck = 0
 i = 0
 N = len(S)
@@ -32,15 +31,13 @@ for i in range(len(S)):
         if tagCheck == 1:
             continue
         elif tagCheck == 0: # just blank
-            print(i, first)
-            print("tmp:",tmp)
-            result += "".join(tmp[i:(first+1):-1])    
+            result += "".join(tmp[i::-1])    
+            tmp = "" 
             result += " "
             first = i
     
     elif tagCheck == 0:
         tmp += S[i]
-        print(tmp)
 
 
     if (i == (len(S)-1)) and (i != first):        

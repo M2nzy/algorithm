@@ -23,12 +23,15 @@ for _ in range(student):
     elif info == 2: #여자
         if switch[switchNum] == 1:
             switch[switchNum] = 0
-        else:
+        elif switch[switchNum] == 0:
             switch[switchNum] = 1
 
+
         for i in range(1, N+1):
-            if (switchNum - i >= 0) and (switchNum + i <= N):
-                if switch[(switchNum - i)] == switch[(switchNum + i)]:
+            if ((switchNum - i) > 0) and ((switchNum + i) <= (N)):
+                if switch[(switchNum - i)] != switch[(switchNum + i)]:   
+                    break                
+                else:
                     if switch[(switchNum - i)] == 0:
                         switch[(switchNum - i)] = 1
                         switch[(switchNum + i)] = 1
@@ -37,7 +40,10 @@ for _ in range(student):
                         switch[(switchNum + i)] = 0
 
 
-for i in range(1, len(switch)):
-    if i == 20:
-        print('\n')
+for i in range(1, N+1):
+    if i % 20 == 0:
+        print()
     print(switch[i], end=' ')
+
+if N % 20 != 0:
+    print()

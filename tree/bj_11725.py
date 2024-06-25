@@ -1,23 +1,12 @@
 import sys
-from collections import deque
 input = sys.stdin.readline
-
-def bfs():
-    global q, visited, graph
-
-    while q:
-        cur = q.popleft()
-        visited[cur] = True
-        for next in range(N+1):
-            if not visited[next] and graph[cur][next]:
-                q.append(next)
-                
+sys.setrecursionlimit(10**8)  
 def dfs(v):
-    global visited, result,graph
-    visited[v] = True
-    result.append(v)
-    for next in range(N+1):
-        if not visited[next] and graph[v][next]:
+    global visited , graph
+    for next in graph[v]:
+        print(next, graph[v])
+        if not visited[next]:
+            visited[next] = v
             dfs(next)
 
 
@@ -25,16 +14,14 @@ def dfs(v):
 
 N = int(input().strip())
 
-graph = [[False] * (N+1) for _ in range(N+1)]
-visited = [False] * (N+1)
+graph = [[] for _ in range(N+1)]
+visited = [0] * (N+1)
 for _ in range (N-1):
     A, B = map(int, input().split())
     graph[A].append(B)
     graph[B].append(A)
 
-q = deque()
-q.append(1)
-result = []
 dfs(1)
-
-print(result)
+    
+for i in range(2, N+1):
+    print(visited[i])

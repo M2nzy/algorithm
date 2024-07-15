@@ -8,9 +8,11 @@ duck = [[] for _ in range(500)]
 cnt = 0
 cur = 0
 firsti, qi, ui, ai, ci = 0, 0, 0, 0, 0
-
+sameCheck = 0
 while sori:
     x = sori.popleft()
+
+    print(duck[qi])
     if x == 'q':
         duck[firsti].append('q')
         firsti += 1
@@ -39,11 +41,31 @@ while sori:
         if 'c' in duck[ci]:
             duck[ci].append('k')
             ci += 1
-            cnt += 1
-            
         else:
             cnt = -1
             break
-    print(firsti, qi, ui, ai, ci, x)
+        print(firsti, qi, ui, ai, ci, x)    
+        print(duck[firsti-1])
         
+        if firsti == qi == ui == ai == ci:
+            tmp = ['q','u','a','c','k']
+            print(ci)
+            if duck[ci-1] == tmp:
+                if sameCheck == 0:
+                    cnt += 1
+                    firsti, qi, ui, ai, ci = 0, 0, 0, 0, 0
+                    sameCheck = 1
+                else:
+                    pass
+                
+        else:
+            cnt += 1
+            sameCheck = 0
+
+
+
+if cnt == 0:
+    cnt = -1
+
+print(cnt)
         

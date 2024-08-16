@@ -33,17 +33,21 @@ def solution(friends, gifts):
     for i in range(len(biao)):
         for j in range(len(biao)):
             if (biao[i][j] == biao[j][i]):
-                if i==j:
-                    continue
-                elif f[friends[i]] > f[friends[j]]:
+                if f[friends[i]] > f[friends[j]]:
                     a[i]+=1
+                elif f[friends[i]] < f[friends[j]]:
+                    a[i] += 1
+                    a[j] += 1
                 elif f[friends[i]] == f[friends[j]]:
-                    continue
+                    break
                 else:
-                    continue
+                    break
             elif biao[i][j] > biao[j][i]:
                 a[i] += 1
+            elif biao[i][j] < biao[j][i]:
+                a[j] += 1
             else:
-                continue
-    answer = max(a)
+                break
+    a.sort()
+    answer = a[-1]
     return answer

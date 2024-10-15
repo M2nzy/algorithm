@@ -7,11 +7,7 @@ def solution(babbling):
     iter = []
     new =[]
     
-    for i in range(len(speak)):
-        print(speak[i])
-        new.append(speak[i])
-        
-    for i in range(2,5):
+    for i in range(1,5):
         iter += (list(itertools.permutations(speak,i)))
 
     iter.sort()

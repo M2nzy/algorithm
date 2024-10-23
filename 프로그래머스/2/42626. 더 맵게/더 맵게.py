@@ -1,25 +1,34 @@
 import heapq
+
 def solution(scoville, K):
     answer = 0
-    heapq.heapify(scoville)
+    scoville.sort()
     
-    #for i in range(len(scoville)):
-    #    heapq.heappush(sco, scoville[i])
+    heap = []
+    mixSco = 0
+    count = 0
+    if len(scoville) < 2 or len(scoville) > 1000000:
+        return -1
+    
+    for i in range(len(scoville)):
+        heapq.heappush(heap, scoville[i])
 
     while True:
-        if scoville[0] >= K:
+        if not heap:
+            return -1
+        elif heap[0] >= K:
             break
-        elif len(scoville) < 2 or len(scoville) > 1000000:
-            answer = -1
-            break
+        elif heap[0] > 1000000000 or heap[0] < 0:
+            return -1
+        
         else:
-            minSco = []
-            for _ in range(2):
-                minSco.append(scoville[0])
-                heapq.heappop(scoville)
-
-            newSco = minSco[0] + (minSco[1] * 2)
-            heapq.heappush(scoville, newSco)
-            answer += 1
-    
-    return answer
+            if heap:
+                a = heapq.heappop(heap)
+            if heap:
+                b = heapq.heappop(heap)
+            elif not heap:
+                return -1
+            mixSco = a + (b * 2)        
+            count += 1
+            heapq.heappush(heap, mixSco)
+    return count

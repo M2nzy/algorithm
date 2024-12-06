@@ -5,11 +5,11 @@ def solution(priorities, location):
     prioritiesName = deque()
     
     for i in range(len(priorities)):
-        prioritiesName.append('num'+str(i))
+        prioritiesName.append('num'+str(i)) # 타겟 이름 배열을 새로 만들어줌
         
     count = 0
+    target = prioritiesName[location] # 타겟 이름 저장
     
-    target = prioritiesName[location]
     while True:
         if not priorities:
             break
@@ -24,13 +24,10 @@ def solution(priorities, location):
             count += 1
             return count
         
-        elif maxPrior == cur:
-            count += 1
+        elif maxPrior == cur: # 우선순위가 가장 높지만 타겟이 아닐 경우 (우선순위가 동일한 프로세스)
+            count += 1 # 실행은 하지만 리턴은 하지 않음
             continue
             
-        else:
-            for i in range(len(priorities)):
-                if cur < priorities[i]:
-                    priorities.append(cur)
-                    prioritiesName.append(curName)
-                    break
+        else: # 우선순위가 높지도 않고 타겟도 아닐 경우 다시 큐에 넣기
+            priorities.append(cur)
+            prioritiesName.append(curName)
